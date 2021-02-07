@@ -7,30 +7,47 @@
 {% block body %}
 
     <!--    Title of the webpage -->
-    <h1 style="text-align: center">Biopsy Analyzer</h1>
+    <h2 style="text-align: center">Biopsy Analyzer</h2>
+
+   <!-- Style definition for the Diagnose Sample button -->
+    <style>
+        .container {
+          height: 50px;
+          position: relative;
+        }
+
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+    </style>
 
     <!-- Diagnose sample button managed by AJAX-->
     <!-- Calls the POST /diagnose_sample and displays the Modal box -->
-    <button type="button" class="btn btn-primary" id="myBtn" data-toggle="modal" data-target="#exampleModal">
-        Diagnose sample
-    </button>
-
-    <!-- Modal dialog box -->
-    <div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            The image is now being diagnosed
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
+    <div class="container">
+      <div class="center">
+        <button type="button" class="btn btn-primary" id="button_diagnose" data-toggle="modal" data-target="#exampleModal">
+            Diagnose sample
+        </button>
       </div>
     </div>
 
-    <!--    OpenSeaDragon UI -->
-    <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+    <!-- Style definition for the OpenSeaDragon UI -->
+    <style>
+      #openseadragon1{
+        width: 800px;
+        height: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+
+    <!-- OpenSeaDragon UI -->
+    <div id="openseadragon1"></div>
     <script src="/static/scripts/openseadragon/openseadragon.min.js"></script>
     <script type="text/javascript">
         var viewer = OpenSeadragon({
@@ -40,10 +57,43 @@
         });
     </script>
 
+    <!-- Style definition for the Modal dialog box -->
+    <style>
+        .modal {
+            text-align: center;
+            padding: 0!important;
+        }
+
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px; /* Adjusts for spacing */
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
+
+    <!-- Modal dialog box -->
+    <div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            The image is now being diagnosed
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- AJAX manager to control the POST call to diagnose_sample -->
     <script>
     addEventListener("DOMContentLoaded", function() {
-      document.getElementById("myBtn").addEventListener("click", function(e) {
+      document.getElementById("button_diagnose").addEventListener("click", function(e) {
         e.preventDefault();
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/diagnose_sample", true);
