@@ -32,3 +32,11 @@ STEP 3 - Access the application
 - It also contains a button that calls a POST method on http://127.0.0.1:5000/diagnose_sample.
 - This method is implemented in the python back end, but it only returns a string saying "The image is now being diagnosed".
 - The button also invokes a Bootstrap Modal dialog showing the same message.
+
+
+
+***** Generation of the DZI images *****
+
+- To use the OpenSeaDragon UI effectively, the biopsy image has been converted from SVS to DZI format.
+- This was done using the library libvips (https://libvips.github.io/libvips/install.html) and following the procedure described here: https://github.com/ashleytowers/OpenSeadragon-Web-Microscopy-Example
+	
