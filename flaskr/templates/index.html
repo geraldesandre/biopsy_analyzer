@@ -10,5 +10,15 @@
 
     <h4 style="text-align: center">This app doesnt do anything yet</h4>
 
+    <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+    <script src="/static/scripts/openseadragon/openseadragon.min.js"></script>
+    <script type="text/javascript">
+        var viewer = OpenSeadragon({
+            id: "openseadragon1",
+            prefixUrl: "/static/scripts/openseadragon/images/",
+            tileSources: "/static/media/biopsy.dzi"
+        });
+    </script>
+
 </div>
 {% endblock %}
