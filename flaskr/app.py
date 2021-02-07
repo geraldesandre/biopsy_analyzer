@@ -8,6 +8,11 @@ app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 
 
 
+# @app.route('/')
+# def index():
+#     return render_template("index2.html")
+
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -25,10 +30,10 @@ def index():
         if 'modal_visible' in session:
             if session['modal_visible']:
                 message = 'Modal is visible'
-                return render_template("index.html", param=message)
+                return render_template("index2.html", param=message)
 
         message = 'Modal is NOT visible'
-        return render_template("index.html", param=message)
+        return render_template("index2.html", param=message)
 
 
 if __name__ == "__main__":
