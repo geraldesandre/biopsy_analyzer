@@ -1,32 +1,44 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Hello, world!</title>
+<title>Biopsy Analyzer</title>
 {% endblock %}
 
 {% block body %}
 
     <!--    Title of the webpage -->
-    <h1 style="text-align: center">Basic Flask App</h1>
+    <h1 style="text-align: center">Biopsy Analyzer</h1>
 
-   <!--    Message controlled by POST method -->
-    <h4 style="text-align: center">{{param}}</h4>
-    <div class="form">
-        <form action="/" method="POST">
-            <input type="submit" value="Go!">
-        </form>
+    <!-- Diagnose sample button managed by AJAX-->
+    <!-- Calls the POST /diagnose_sample and displays the Modal box -->
+    <button type="button" class="btn btn-primary" id="myBtn" data-toggle="modal" data-target="#exampleModal">
+        Diagnose sample
+    </button>
+
+    <!-- Modal dialog box -->
+    <div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            The image is now being diagnosed
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!--Create a button to be monitored by AJAX-->
-    <button type="button" class="btn btn-primary" id="myBtn" data-toggle="modal" data-target="#exampleModal">
-        Call POST
-    </button>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-    </button>
-
+    <!--    OpenSeaDragon UI -->
+    <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+    <script src="/static/scripts/openseadragon/openseadragon.min.js"></script>
+    <script type="text/javascript">
+        var viewer = OpenSeadragon({
+            id: "openseadragon1",
+            prefixUrl: "/static/scripts/openseadragon/images/",
+            tileSources: "/static/media/biopsy.dzi"
+        });
+    </script>
 
     <!-- AJAX manager to control the POST call to diagnose_sample -->
     <script>
@@ -38,39 +50,6 @@
         xhttp.send();
       });
     }, true);
-    </script>
-
-
-
-
-
-
-
-
-    <!-- Modal dialog box -->
-    <div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            Some message in the modal
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!--    OpenSeaDragon UI -->
-    <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
-    <script src="/static/scripts/openseadragon/openseadragon.min.js"></script>
-    <script type="text/javascript">
-        var viewer = OpenSeadragon({
-            id: "openseadragon1",
-            prefixUrl: "/static/scripts/openseadragon/images/",
-            tileSources: "/static/media/biopsy.dzi"
-        });
     </script>
 
     <!--    Bootstrap Scripts (necessary for the Modal dialog box)-->
